@@ -25,8 +25,16 @@ export default class Camera
     setInstance()
     {
         // Set up
-        this.instance = new THREE.PerspectiveCamera(60, this.config.width / this.config.height, 0.1, 150)
-        this.instance.rotation.reorder('YXZ')
+        let frustumSize = 1
+        let aspect = this.config.width / this.config.height
+        this.instance = new THREE.OrthographicCamera(
+            frustumSize * aspect / - 2,
+            frustumSize * aspect / 2,
+            frustumSize / 2,
+            frustumSize / - 2,
+            -1000,
+            1000
+        )
 
         this.scene.add(this.instance)
     }
@@ -44,7 +52,7 @@ export default class Camera
         this.modes.debug = {}
         this.modes.debug.instance = this.instance.clone()
         this.modes.debug.instance.rotation.reorder('YXZ')
-        this.modes.debug.instance.position.set(0, 0, 1)
+        this.modes.debug.instance.position.set(0, 0, 2)
         
         this.modes.debug.orbitControls = new OrbitControls(this.modes.debug.instance, this.targetElement)
         this.modes.debug.orbitControls.enabled = this.modes.debug.active

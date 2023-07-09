@@ -29,6 +29,14 @@ export default class Experience {
       return;
     }
 
+    this.frame = 0;
+
+    this.scroller = [...document.querySelectorAll(".slider__scroller")]
+    this.position = -2*(360+200)
+
+    this.encodedSlides = [...document.querySelectorAll(".encoded .slide")]
+
+
     this.time = new Time();
     this.sizes = new Sizes();
     this.setConfig();
@@ -39,12 +47,40 @@ export default class Experience {
     this.setRenderer();
     this.setResources();
     this.setWorld();
+    this.populateEncodedSlides();
 
     this.sizes.on("resize", () => {
       this.resize();
     });
 
     this.update();
+  }
+
+  generateString(length) {
+    var result = "";
+    var characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%^&!@";
+    var charactersLength = characters.length;
+    let counter = 0
+    while (counter < length) {
+      if(Math.random() > 0.95) {
+        result += '<strong>' + characters.charAt( Math.floor(Math.random() * charactersLength)) + '</strong>';
+      }
+      else {
+        result += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
+      } 
+      result += " ";
+      counter++
+    }
+    return result;
+  }
+
+  populateEncodedSlides() {
+    this.encodedSlides.forEach((slide) => {
+      slide.innerHTML = this.generateString(400);
+    });
   }
 
   setConfig() {
@@ -98,6 +134,17 @@ export default class Experience {
 
   update() {
     if (this.stats) this.stats.update();
+
+    this.frame += 1;
+    if(this.frame % 50 === 0) {
+      this.populateEncodedSlides();
+    }
+
+    this.position += 0.5;
+    if(this.position > 0) this.position = -2*(360+200);
+    this.scroller.forEach((scroller) => {
+      scroller.style.transform = `translateX(${this.position}px)`;
+    });
 
     this.camera.update();
 

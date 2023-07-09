@@ -1,19 +1,110 @@
-*
-{
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital@1&display=swap');
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html,
-body
-{
-    overflow: hidden;
+body {
+    background-color: #333;
 }
 
-.experience
-{
-    position: fixed;
+canvas {
+    display: block;
+    position: relative;
+    z-index: 100;
+}
+
+.experience {
+    transition: opacity 0.2s ease-in-out;
+}
+
+.slider__odin {
+    position: relative;
+    top: 200px;
+    height: 240px;
+}
+
+.slider__parent {
+    position: absolute;
+    /* top: 200px; */
+    width: 100%;
+    clip-path: inset(0 50% 0 0);
+}
+
+.slider__parent.encoded {
+    clip-path: inset(0 0 0 50%);
+}
+
+.slider {
+    overflow: hidden;
+    width: 100%;
+}
+
+.slider__scroller {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 200px;
+}
+
+.slide {
+    width: 360px;
+    min-width: 360px;
+    height: 240px;
+}
+
+.slide img {
+    display: block;
+    width: 100%;
+}
+
+.encoded .slide {
+    color: #777;
+    font-size: 12px;
+    font-family: 'Roboto Mono', monospace;
+    overflow: hidden;
+
+}
+
+.encoded .slide strong {
+    color: white;
+}
+
+.experience {
+    position: absolute;
+    top: 200px;
     width: 100vw;
-    height: 100vh;
+    height: 240px;
+}
+
+.separator {
+    position: absolute;
+    left: 50%;
+    width: 100px;
+    height: 100%;
+    margin-left: -50px;
+    /* background-color: red; */
+    /* mix-blend-mode: screen; */
+    z-index: 10;
+}
+
+.separator::before {
+    position: absolute;
+    content: '';
+    width: 50%;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(90deg, #FFF, #6432E6, 20%, rgba(100, 50, 230, 0));
+}
+
+.separator::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: #FFF;
 }

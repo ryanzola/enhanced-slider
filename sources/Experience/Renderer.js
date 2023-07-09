@@ -30,20 +30,20 @@ export default class Renderer
 
     setInstance()
     {
-        this.clearColor = '#010101'
+        // this.clearColor = '#333333'
 
         // Renderer
         this.instance = new THREE.WebGLRenderer({
-            alpha: false,
+            alpha: true,
             antialias: true
         })
-        this.instance.domElement.style.position = 'absolute'
-        this.instance.domElement.style.top = 0
-        this.instance.domElement.style.left = 0
-        this.instance.domElement.style.width = '100%'
-        this.instance.domElement.style.height = '100%'
+        // this.instance.domElement.style.position = 'absolute'
+        // this.instance.domElement.style.top = 0
+        // this.instance.domElement.style.left = 0
+        // this.instance.domElement.style.width = '100%'
+        // this.instance.domElement.style.height = '100%'
 
-        this.instance.setClearColor(this.clearColor, 1)
+        // this.instance.setClearColor(this.clearColor, 1)
         this.instance.setSize(this.config.width, this.config.height)
         this.instance.setPixelRatio(this.config.pixelRatio)
 
