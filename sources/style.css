@@ -16,8 +16,13 @@ canvas {
     z-index: 100;
 }
 
-.experience {
-    transition: opacity 0.2s ease-in-out;
+.experience,
+.experience1 {
+    position: absolute;
+    top: 200px;
+    width: 100vw;
+    height: 240px;
+    transition: opacity 0.7s ease-in-out;
 }
 
 .slider__odin {
@@ -71,13 +76,6 @@ canvas {
     color: white;
 }
 
-.experience {
-    position: absolute;
-    top: 200px;
-    width: 100vw;
-    height: 240px;
-}
-
 .separator {
     position: absolute;
     left: 50%;
@@ -85,8 +83,8 @@ canvas {
     height: 100%;
     margin-left: -50px;
     /* background-color: red; */
-    /* mix-blend-mode: screen; */
-    z-index: 10;
+    mix-blend-mode: screen;
+    transition: opacity 0.7s ease-in-out;
 }
 
 .separator::before {
@@ -96,7 +94,7 @@ canvas {
     top: 0;
     bottom: 0;
     right: 0;
-    background: linear-gradient(90deg, #FFF, #6432E6, 20%, rgba(100, 50, 230, 0));
+    background: linear-gradient(90deg, #FFFFFF, #6432E6, 20%, rgba(100, 50, 230, 0));
 }
 
 .separator::after {
@@ -106,5 +104,23 @@ canvas {
     top: 0;
     bottom: 0;
     width: 3px;
+    transform: translateX(-50%);
     background: #FFF;
+}
+
+.counter {
+    position: absolute;
+    font-size: 30px;
+    color: #FFF;
+}
+
+.real_separator {
+    position: absolute;
+    left: 50%;
+    width: 3px;
+    top: -10px;
+    bottom: -10px;
+    background-color: #FFF;
+    transform: translateX(-50%);
+
 }

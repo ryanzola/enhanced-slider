@@ -31,6 +31,9 @@ export default class Experience {
 
     this.frame = 0;
 
+    // this.counter = document.querySelector(".counter")
+    this.targetElement1 = document.querySelector(".experience1")
+    this.separator = document.querySelector(".separator")
     this.scroller = [...document.querySelectorAll(".slider__scroller")]
     this.position = -2*(360+200)
 
@@ -43,8 +46,10 @@ export default class Experience {
     this.setDebug();
     this.setStats();
     this.setScene();
+    this.setScene2();
     this.setCamera();
     this.setRenderer();
+    this.setRenderer2();
     this.setResources();
     this.setWorld();
     this.populateEncodedSlides();
@@ -114,14 +119,24 @@ export default class Experience {
     this.scene = new THREE.Scene();
   }
 
+  setScene2() {
+    this.scene2 = new THREE.Scene();
+  }
+
   setCamera() {
     this.camera = new Camera();
   }
 
   setRenderer() {
-    this.renderer = new Renderer({ rendererInstance: this.rendererInstance });
+    this.renderer = new Renderer({ scene: this.scene });
 
     this.targetElement.appendChild(this.renderer.instance.domElement);
+  }
+
+  setRenderer2() {
+    this.renderer2 = new Renderer({ scene: this.scene2 });
+
+    this.targetElement1.appendChild(this.renderer2.instance.domElement);
   }
 
   setResources() {
@@ -130,6 +145,20 @@ export default class Experience {
 
   setWorld() {
     this.world = new World();
+  }
+
+  checkIfActive() {
+    let half = this.config.width / 2;
+    let slideWidth = 360;
+    let slideGap = 200;
+    let whole = slideWidth + slideGap;
+    this.tempPos = this.position + whole * 10;
+    this.currPos = this.tempPos % whole;
+    let center = this.currPos > (half - slideWidth)
+    if(this.currPos > half) center = false;
+    // this.counter.innerHTML = center;
+
+    return center;
   }
 
   update() {
@@ -146,11 +175,22 @@ export default class Experience {
       scroller.style.transform = `translateX(${this.position}px)`;
     });
 
+    if(this.checkIfActive()) {
+      this.targetElement.style.opacity = 1;
+      this.separator.style.opacity = 1;
+
+    } else {
+      this.targetElement.style.opacity = 0;
+      this.separator.style.opacity = 0;
+    }
+
     this.camera.update();
 
     if (this.world) this.world.update();
 
     if (this.renderer) this.renderer.update();
+
+    if (this.renderer2) this.renderer2.update();
 
     window.requestAnimationFrame(() => {
       this.update();
@@ -168,6 +208,7 @@ export default class Experience {
     if (this.camera) this.camera.resize();
 
     if (this.renderer) this.renderer.resize();
+    if (this.renderer2) this.renderer2.resize();
 
     if (this.world) this.world.resize();
   }

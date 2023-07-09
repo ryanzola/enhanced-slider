@@ -1,5 +1,6 @@
 
 attribute float aDistance;
+attribute float aRandom;
 attribute float aSize;
 attribute float aVelocity;
 
@@ -16,11 +17,11 @@ void main() {
   vUv = uv;
 
   vec3 pos = position;
-  pos.x = mod( 0.9 * aVelocity * time, aDistance );
+  pos.x = mod( 0.08 * aVelocity * time - aRandom, 1.0 );
 
   vTravelled = pos.x;
 
-  pos.x *= 0.2;
+  pos.x = 5.0 * (pos.x - 0.5);
 
   vec4 mvPosition = modelViewMatrix * vec4( pos, 1.0 );
 

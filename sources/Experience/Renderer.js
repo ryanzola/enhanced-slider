@@ -13,7 +13,7 @@ export default class Renderer
         this.stats = this.experience.stats
         this.time = this.experience.time
         this.sizes = this.experience.sizes
-        this.scene = this.experience.scene
+        this.scene = _options.scene || this.experience.scene
         this.camera = this.experience.camera
 
         // Debug
@@ -24,11 +24,11 @@ export default class Renderer
         
         this.usePostprocess = false
 
-        this.setInstance()
+        this.setInstance(_options)
         this.setPostProcess()
     }
 
-    setInstance()
+    setInstance(_options = {})
     {
         // this.clearColor = '#333333'
 
@@ -43,7 +43,8 @@ export default class Renderer
         // this.instance.domElement.style.width = '100%'
         // this.instance.domElement.style.height = '100%'
 
-        // this.instance.setClearColor(this.clearColor, 1)
+        // this.instance.setClearColor(_options.clearColor, 1)
+
         this.instance.setSize(this.config.width, this.config.height)
         this.instance.setPixelRatio(this.config.pixelRatio)
 
