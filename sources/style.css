@@ -7,7 +7,8 @@
 }
 
 body {
-    background-color: #333;
+    height: 100vh;
+    background: radial-gradient(140% 115% at 50% 15%,rgba(0,0,0,0) 40%,#63e 70%,#fff 100%),#010314;
 }
 
 canvas {
@@ -16,13 +17,18 @@ canvas {
     z-index: 100;
 }
 
-.experience,
-.experience1 {
+.experience {
     position: absolute;
     top: 200px;
     width: 100vw;
     height: 240px;
-    transition: opacity 0.7s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.experience1 {
+    position: absolute;
+    top: 0;
+    z-index: -1;
 }
 
 .slider__odin {
@@ -84,7 +90,7 @@ canvas {
     margin-left: -50px;
     /* background-color: red; */
     mix-blend-mode: screen;
-    transition: opacity 0.7s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
 }
 
 .separator::before {

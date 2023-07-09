@@ -59,9 +59,14 @@ export default class Canvas {
     let random = new Float32Array(number);
 
     for (let i = 0; i < number; i++) {
+      // x
       positions[i * 3 + 0] = 0;
+
+      // y
       positions[i * 3 + 1] = Math.random() - 0.5 + 0.5 * (Math.random() - 0.5);
       positions[i * 3 + 1] *= 0.66;
+
+      // z
       positions[i * 3 + 2] = 0;
 
       sizes[i] = this.randomInRange(3, 14);
